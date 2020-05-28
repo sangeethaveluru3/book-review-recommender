@@ -1,17 +1,17 @@
-Data Science: Capstone Project
+## General Assembly Data Science Capstone Project - Book Review Recommender
 
+The purpose of this project was to build a book review recommender system. 
 
-The purpose of this project was to build a book review recommender system. Given the overwhelming number of options for each product with the rise of e-commerce, more and more customers are starting to put weight on reviews. Currently Amazon and Goodreads order their reviews by the reviewer ranking or the number of likes/helpful votes a post gets. But shouldn't how similar a reviewer is to you also have a part to play? In the age of recommmender systems, it felt fitting to try to not build a system that recommends book as well as recommending the best reviews to read, based on the user similarities. 
-
-Background and project overview 
+### Background and Problem Statement
+Given the overwhelming number of options for each product with the rise of e-commerce, more and more customers are starting to put weight on reviews. Currently Amazon and Goodreads order their reviews by the reviewer ranking or the number of likes/helpful votes a post gets. But shouldn't how similar a reviewer is to you also have a part to play? In the age of recommmender systems, it felt fitting to try to not build a system that recommends book as well as recommending the best reviews to read, based on the user similarities. 
 
 Data Accquring 
 
 Files included
-- Data cleaning
-- EDA 
-- Recommender system and Surprise CV test 
-- Cosine similarities function
+- Data cleaning/condensing:
+- EDA:
+- Recommender system and Surprise CV test:
+- Cosine similarities function:
 
 Results and next steps 
 
