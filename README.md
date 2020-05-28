@@ -1,65 +1,36 @@
-## General Assembly Data Science Capstone Project - Book Review Recommender
+# General Assembly Data Science Capstone Project - Book Review Recommender
 
 The purpose of this project was to build a book review recommender system. 
 
-### Background and Problem Statement
-Given the overwhelming number of options for each product with the rise of e-commerce, more and more customers are starting to put weight on reviews. Currently Amazon and Goodreads order their reviews by the reviewer ranking or the number of likes/helpful votes a post gets. But shouldn't how similar a reviewer is to you also have a part to play? In the age of recommmender systems, it felt fitting to try to not build a system that recommends book as well as recommending the best reviews to read, based on the user similarities. 
+## Background and Problem Statement
+Given the overwhelming number of options for each product with the rise of e-commerce, more and more customers are starting to put weight on reviews. Currently Amazon and Goodreads order their reviews by the reviewer ranking or the number of likes/helpful votes a post gets. But shouldn't how similar a reviewer is to you also have a part to play? In the age of recommmender systems, it felt fitting to try to not build a system that recommends the product as well as recommending the best reviews to read, based on the user similarities. I wanted to measure what sort of impact this re-ordering might have. 
 
-### Data Accquring 
-Decided to use the [dataset provided by Julian McAuley and his team at USCD.](http://jmcauley.ucsd.edu/data/amazon/) 
+I chose books as this is a problem I have often thought about when reading book reviews and is more applicable to books since with other products you may just be concerned more with the functionality of the product, but with a book you are looking for an experience which is a lot more personal and hence reviews ordered by user-similarity should be of more relevance. 
 
-Files included
-- Data cleaning/condensing:
-- EDA:
-- Recommender system and Surprise CV test:
-- Cosine similarities function:
+## Data Accquring 
+Decided to use the [dataset provided by Julian McAuley and his team at USCD.](http://jmcauley.ucsd.edu/data/amazon/) I used the 2014 5-core book review dataset as the later 2018 ones were a lot larger. I also downloaded the book metadata dataset. One thing to note here is that when downloading the file, make sure to discard any rows of data that have a title longer than 100 characters as some of the rows contain html code scraped erroneously and causes the last 100k rows to amount to over 5GB when unzipping. I have included the notebook to help you deal with this issue or you can just use the CSV files I used for ease. 
 
-Results and next steps 
+### Data files:
+- subset of the data 
+- subset of the meta data. 
 
-
-
-
-
-
-### **[Capstone, Part 1: Pitch + Problem Statement](./part-01/readme.md)**
-
-Pitch us on potential ideas for a data-driven project. Think of topics you’re passionate about, knowledge you’re familiar with, or problems relevant to industries you’d like to work with. What questions do you want to answer?
-- **Requirements:** Lightning talk with 2-3 topics, including a problem statement, potential audience, goals, and success metrics, as well as possible data sources for each. Remember, if you can’t find data, you can’t do your project.
-- **Format:** Slide deck
-- **Due:** Week 8, Friday, 17 April
+### Files included
+- Data cleaning: incase you want to download the files and have a go at cleaning yourself and storing them as CSVs 
+- Data condensing: I decided to only use a subset of the data given time constraints and laptop capabilities. I condensed the dataset down to picking the books that had atleast 50 reviews and then of that choosing the reviewers that had reviewed book atleast 50 times. Left me with ~270k rows of reviews and ratings. Includes the stats of the subset. 
+- EDA: Some EDA. Shows that negative reviews get more attention and other findings. 
+- Recommender system and Surprise CV test: The notebook for first checking all the algorithms and then gridsearching the chosen 4. 
+- Cosine similarities function script: A script containing a random generator function that allow to pick a user and randomly one of their top 10 books. Function returns the current order of book, recommended order, comparision of categories. 
+- Results and metrics: metrics to measure the impact of the model as well as visualising the result of the re-ordering using the cosine similarities function 
 
 
-### **[Capstone, Part 2: Dataset + Data Collection](./part-02/readme.md)**
+## Results and next steps 
+I obviously cannot measure the impact of the model as I would need customers to tell me if this reordering is helpful or not but it was interesting to see if the model had any massive impact. 
 
-Use your newfound skills to source and collect the relevant data for your project. Data acquisition, transformation, and cleaning are typically the most time-consuming parts of data science projects, so don't procrastinate!
+- Group the categories a bit better
+- Use better meta dataset 
+- try to include review text context analysis to improve the recommender system 
+- neighbourhood models to use for cosine similarity rather than calculating using the whole user-item matrix 
 
-- **Requirements**: Source and format the data for your project. Perform preliminary data munging and cleaning of the data relevant to your project goals.  Describe your data keeping the intended audience of your final report in mind.
-- **Format:** Table, file, or database with relevant description in a Jupyter Notebook
-- **Due:** End of week 10, Friday, 01 May
 
-
-### **[Capstone, Part 3: EDA + Preliminary Analysis](./part-03/readme.md)**
-
-Begin quantitatively describing and visualizing your data. With rich datasets, EDA can go down an endless number of roads. Maintain perspective on your goals and scope your EDA accordingly. Managing your own time is a critical skill in analysis projects.  Keep notes on your approach, results, setbacks, and findings.
-
-- **Requirements**: Perform initial descriptive and visual analysis of your data. Identify outliers, summarize risks and limitations, and describe how your EDA will inform your modeling decisions.
-- **Format:** Jupyter Notebook
-- **Due:** End of week 11, Thursday, 07 May
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) 
 
-### **[Capstone, Part 4: Findings + Technical Report](./part-04/readme.md)**
-
-Share your technical findings with your fellow data scientists. Explain your goals, describe modeling choices, evaluate model performance, and discuss results. Data science reporting is technical, but don’t forget that you should tell a compelling story about your data.
-
-- **Requirements**: Summarize your goals and metrics for success, variables of interest, and removal of any outliers or data imputation. Your process description should be concise and relevant to your goals. Summarize statistical analysis, including model selection,  implementation, evaluation, and inference. Be convincing – justify all important decisions! Clearly label plots and visualizations. Include an Executive Summary.
-- **Format:** Jupyter Notebook
-- **Due:** End of week 12, 15 May
-
-
-### **[Capstone, Part 5: Presentation + Non-Technical Summary](./part-05/readme.md)**
-
-Take your findings and share a presentation that delivers the most important insights from your project to a non-technical audience. Tell us the most interesting story about your data. Break down your process for a novice audience. Make sure to include compelling visuals. Time is short, so be sure to practice and include only the most relevant components of your project.
-
-- **Requirements**: Convey your goals, limits/assumptions, methods and their justification, findings, and conclusions. Define technical terms. Include graphics and visualizations.
-- **Format:** Interactive graphic presentation, website, or slide deck.
-- **Due:** End of week 13, 21/22 May
