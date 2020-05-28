@@ -1,22 +1,20 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Data Science: Capstone Project
+Data Science: Capstone Project
 
-The Capstone Project is divided into 5 deliverables, each building on top of skills learned previously to scaffold students' learning over the entire course. Project deliverables include objectives, requirements, rubrics, and suggested resources - all of which tie into the overall competencies for this course.
+
+The purpose of this project was to build a book review recommender system. Given the overwhelming number of options for each product with the rise of e-commerce, more and more customers are starting to put weight on reviews. Currently Amazon and Goodreads order their reviews by the reviewer ranking or the number of likes/helpful votes a post gets. But shouldn't how similar a reviewer is to you also have a part to play? In the age of recommmender systems, it felt fitting to try to not build a system that recommends book as well as recommending the best reviews to read, based on the user similarities. 
 
 Background and project overview 
 
 Data Accquring 
 
-Data cleaning 
+Files included
+- Data cleaning
+- EDA 
+- Recommender system and Surprise CV test 
+- Cosine similarities function
 
-EDA 
+Results and next steps 
 
-Recommender system and Surprise CV test 
-
-Cosine similarities function
-
-Results
-
-Next steps 
 
 
 
@@ -46,7 +44,7 @@ Begin quantitatively describing and visualizing your data. With rich datasets, E
 - **Requirements**: Perform initial descriptive and visual analysis of your data. Identify outliers, summarize risks and limitations, and describe how your EDA will inform your modeling decisions.
 - **Format:** Jupyter Notebook
 - **Due:** End of week 11, Thursday, 07 May
-
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) 
 
 ### **[Capstone, Part 4: Findings + Technical Report](./part-04/readme.md)**
 
