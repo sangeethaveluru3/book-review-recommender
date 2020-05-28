@@ -5,7 +5,8 @@ The purpose of this project was to build a book review recommender system.
 ### Background and Problem Statement
 Given the overwhelming number of options for each product with the rise of e-commerce, more and more customers are starting to put weight on reviews. Currently Amazon and Goodreads order their reviews by the reviewer ranking or the number of likes/helpful votes a post gets. But shouldn't how similar a reviewer is to you also have a part to play? In the age of recommmender systems, it felt fitting to try to not build a system that recommends book as well as recommending the best reviews to read, based on the user similarities. 
 
-Data Accquring 
+### Data Accquring 
+Decided to use the [dataset provided by Julian McAuley and his team at USCD.](http://jmcauley.ucsd.edu/data/amazon/) 
 
 Files included
 - Data cleaning/condensing:
