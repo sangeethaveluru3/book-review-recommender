@@ -210,7 +210,7 @@ def get_categories(user_, top_10_recos_, merged_):
     read_cat_ = merged_[merged_.reviewerId == user_].categories.value_counts(normalize=True)[:10]
     
     #Top 10 categories recommended
-    reco_cat_ = merged[merged.asin.isin(top_10[top_10.user == 'A2RQ0AT4XZUIXL'].book)].categories.value_counts(normalize=True)[:10]
+    reco_cat_ = merged_[merged_.asin.isin(top_10_recos_[top_10_recos_.user == 'A2RQ0AT4XZUIXL'].book)].categories.value_counts(normalize=True)[:10]
     
     return read_cat_, reco_cat_
     
@@ -242,7 +242,6 @@ def review_reorder_example(user_, book_, df_, metadata_, merged_, impact_df_, pr
     # first obtain the existing reviews for the book
     relevant_reviews = df_[df_.asin == book_].copy()
 
-    relevant_reviews = df_[df_.asin == book].copy()
     relevant_reviews = relevant_reviews.merge(metadata_, on='asin')[
         ['reviewerId', 'title', 'rating', 'summary', 'total_votes', 'categories']]
 
