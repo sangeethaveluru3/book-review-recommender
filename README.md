@@ -8,7 +8,7 @@ When reading book reviews before purchasing a book, I often find myself wonderin
 While this project would just consider books, this could extend to other products where the experience vs the functionality of the product would be more important. Given the overwhelming number of options for each product with the rise of e-commerce, more and more customers are starting to put increasing weight on reviews. Currently Amazon and Goodreads order their reviews by the reviewer ranking or the number of likes/helpful votes a post gets but this is not personalised to users and in the age of recommender systems, feels fitting that it should be the next step. Therefore, this feature could be an interesting addition and actually is a requested feature on GoodReads currently. 
 
 ## Data Accquring & Cleaning
-Notebooks: `data_cleaning` & `connecting_to_gcloud`
+Files: `data_cleaning` & `connecting_to_gcloud`
 
 I am using the the [datasets provided by Julian McAuley and his team at USCD](http://jmcauley.ucsd.edu/data/amazon/), in particular the 2014 5-core book review dataset and the book metadata. 
 
@@ -17,7 +17,7 @@ The data was presented in large JSON files that I processed and cleaned chunkwis
 The condensed dataset had ~270k rows with all users and books that had atleast 50 reviews.  
 
 ## EDA
-Notebook:`eda_book_review` 
+Files:`eda_book_review` 
 
 I have gone through all of my findings in EDA of the datasets in the notebook `eda_book_review` notebook, but here are the main takeaways. 
 
@@ -38,21 +38,49 @@ These are the top 10 categories of the books. Not all of the books had metadata 
 image
 
 ## Picking the best algorithm and Gridsearching (Hypertuning)
-Notebooks: `testing_surprise_algos`, `baselineonly_gridsearch`, `knnbaseline_gridsearch` and `svd_gridsearch`
+Files: `testing_surprise_algos`, `baselineonly_gridsearch`, `knnbaseline_gridsearch` and `svd_gridsearch`
 
 The [Surprise library](https://surprise.readthedocs.io/en/stable/index.html), a Python scikit, comes with a large of recommender system algorithms and I wanted to test all of the algorithms to find the best few, in terms of minimum RMSE, to gridsearch and hypertune even further. I used code from [this notebook](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Building%20Recommender%20System%20with%20Surprise.ipynb) to iteratively cross validate all of the algorfirst cross validated all the algorithms, the code for this is in the notebook `testing_surprise_algos`. 
 
 image
 
-I picked BaselineOnly, SVD (picked this over SVD++ due to fit time) and KNNBaseline to hypertune with gridsearch further to obtain 
+I picked BaselineOnly, SVD (picked this over SVD++ due to fit time) and KNNBaseline to hypertune with gridsearch further to obtain best RMSE score possible - BaselineOnly had the best score after gridsearching at 0.85279 (vs SVD at 0.8579 and KNNBaseline 0.8920). The code for gridsearching the three algos are in the notebooks `baselineonly_gridsearch`, `knnbaseline_gridsearch` and `svd_gridsearch`.
 
-- Recommender system and Surprise CV test: The notebook for first checking all the algorithms and then gridsearching the chosen 4. 
+## Recommender systems
+No
 - Cosine similarities function script: A script containing a random generator function that allow to pick a user and randomly one of their top 10 books. Function returns the current order of book, recommended order, comparision of categories. 
 - Results and metrics: metrics to measure the impact of the model as well as visualising the result of the re-ordering using the cosine similarities function 
 
 
 ## Recommender systems
-Notebooks:
+Files:
+
+### Basic Recommender system:
+I first implemented a basic recommender system to get a general sense of how the algorithms were working. The basic recommder system uses this equation to estimate the rating, $r_{ui}$, that user $u$ would give an item $i$: 
+$$r_{ui} = \mu + b_u + b_i$$
+
+where $\mu$ is the overall rating mean, $b_u$ is the user bias (e.g. are they usually a more critical rater) and $b_i$ is the item bias after adjusting for the overall mean. We can use this to create a prediction matrix (rows = users & columns = books), where we can calculate the ratings for each user for each book, which we can then use to obtain the top n recommendations for each user. The notebook `basic_rec_system` details this process. 
+
+### BaselineOnly Recommender system. 
+
+BaslineOnly approach works by estimating $b_{ui}$, which can be defined as follows:
+
+$$b_{ui} = \mu + b_u + b_i$$
+
+where $\mu$ is the overall rating mean, $b_u$ is the user bias (e.g. are they usually a more critical rater) and $b_i$ is the item bias after adjusting for the overall mean. The difference from the basic recommder system is that the algorithm tries to find the optimal $b_u$ and $b_i$ by minimising the following equation (RMSE):
+
+$$ min \sum (r_{ui} - \mu - b_u - b_i)^2 + \lambda (\sum_u b_u^2 + \sum_i b_i^2)$$
+
+where $\lambda$ serves as a regularisation term to avoid overfitting. We can use this to construct the prediction matrix. [This report](http://courses.ischool.berkeley.edu/i290-dm/s11/SECURE/a1-koren.pdf) has a great explanation of the mathematicals workings of this algo and others that Surprise builds on. 
+
+### Recommender_functions.py script 
+
+Functions 
+- 
+- 
+-
+
+
 I obviously cannot measure the impact of the model as I would need customers to tell me if this reordering is helpful or not but it was interesting to see if the model had any massive impact. 
 
 - Group the categories a bit better
