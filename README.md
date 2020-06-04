@@ -14,10 +14,25 @@ I am using the the [datasets provided by Julian McAuley and his team at USCD](ht
 
 The data was presented in large JSON files that I processed and cleaned chunkwise, given the size of the files and capablities of my laptop, before storing them as CSV files. The cleaning processed involved disregarding any incorrect rows with large HTML code from webscrapping, reengineering a few columns for better data storage and so on, which I have documented in the `data_cleaning` notebook. I had initially planned to upload these large CSV files to a Postgres database on GCloud to query from Jupyter Notebooks. But I ended up condensing the dataset and it made more sense to leave them as CSV files locally. However, I did upload the process of connecting to GCloud in the `connecting_to_gcloud` notebook. 
 
-The condensed dataset had ~270k rows with users and books that had atleast 50 reviews.  
+The condensed dataset had ~270k rows with all users and books that had atleast 50 reviews.  
 
 ## EDA
-Notebook:
+Notebook:`eda_book_review` 
+
+I have gone through all of my findings in EDA of the datasets in the notebook `eda_book_review` notebook, but here are the main takeaways. 
+
+The reviews were very skewed to the positive side with mainly 4 or 5 star ratings. 
+
+Negative reviews tend to get more attention as the avg number of total votes (likes) per rating category is the highest for 1 star and 2 star reveiews. This could push negative reviews unfairly to the top. 
+
+
+Look over the years, from 2000 to 2014, reviewers seem to have gotten more critical over the years with the avg rating dropped from ~4.25 to ~3.9. Note that this across a 4000-day rolling avg as the rating jumped around a lot and needed a large window to smooth the curve. Interestingly, there is a large drop in 2007/2008, around the time of the financial crash, maybe to signify that the emotional toll from the economic collapse split over into how critical the reviewers were? 
+
+
+These were the top categories of the books 
+
+
+
 
 - EDA: Some EDA. Shows that negative reviews get more attention and other findings. 
 
