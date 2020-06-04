@@ -23,21 +23,29 @@ I have gone through all of my findings in EDA of the datasets in the notebook `e
 
 The reviews were very skewed to the positive side with mainly 4 or 5 star ratings. 
 
+image 
+
 Negative reviews tend to get more attention as the avg number of total votes (likes) per rating category is the highest for 1 star and 2 star reveiews. This could push negative reviews unfairly to the top. 
 
+image 
 
 Look over the years, from 2000 to 2014, reviewers seem to have gotten more critical over the years with the avg rating dropped from ~4.25 to ~3.9. Note that this across a 4000-day rolling avg as the rating jumped around a lot and needed a large window to smooth the curve. Interestingly, there is a large drop in 2007/2008, around the time of the financial crash, maybe to signify that the emotional toll from the economic collapse split over into how critical the reviewers were? 
 
+image 
 
-These were the top categories of the books 
+These are the top 10 categories of the books. Not all of the books had metadata and even the books that did, some of information was vague, broad and not complete. E.g. most books had the tag 'Literature & Fiction' which made it hard to distiguish books well enough from one another. This is especially when trying to compare the results of the recommender system. 
 
-
-
-
-- EDA: Some EDA. Shows that negative reviews get more attention and other findings. 
+image
 
 ## Picking the best algorithm and Gridsearching (Hypertuning)
-Notebooks:
+Notebooks: `testing_surprise_algos`, `baselineonly_gridsearch`, `knnbaseline_gridsearch` and `svd_gridsearch`
+
+The [Surprise library](https://surprise.readthedocs.io/en/stable/index.html), a Python scikit, comes with a large of recommender system algorithms and I wanted to test all of the algorithms to find the best few, in terms of minimum RMSE, to gridsearch and hypertune even further. I used code from [this notebook](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Building%20Recommender%20System%20with%20Surprise.ipynb) to iteratively cross validate all of the algorfirst cross validated all the algorithms, the code for this is in the notebook `testing_surprise_algos`. 
+
+image
+
+I picked BaselineOnly, SVD (picked this over SVD++ due to fit time) and KNNBaseline to hypertune with gridsearch further to obtain 
+
 - Recommender system and Surprise CV test: The notebook for first checking all the algorithms and then gridsearching the chosen 4. 
 - Cosine similarities function script: A script containing a random generator function that allow to pick a user and randomly one of their top 10 books. Function returns the current order of book, recommended order, comparision of categories. 
 - Results and metrics: metrics to measure the impact of the model as well as visualising the result of the re-ordering using the cosine similarities function 
