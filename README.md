@@ -76,7 +76,7 @@ We can use the RMSE score to assess how well the model is doing in terms of reco
 - `review_reorder_example`: Returns a visual example of how re-ordering the reviews would look like, i.e. returns the order of reviews before and after calculating the user similarities, along with the categories previously read by the top 10 reviewers before and after, to assess if there is any noticeable difference. 
 
 
-## Results:
+## Results
 The example below is a great case as to why reviewer similarity should play a part in ordering reviews.
 
 - User: 'A3UDYY6L2NH3JS'
@@ -84,7 +84,7 @@ The example below is a great case as to why reviewer similarity should play a pa
 
 The image below shows what order the reviews would currently appear (in order of the number of likes) on the right and on the left, the order the reviews should appear if ordered according to user similarity. 
 
-The reviews on the right are more mixed but on the left, top 10 reviewers most similar to our user all rated the book 5 stars. Looking at the categories of books previously read by the reviewers, the ones of the right have read a higher % of Sci-Fi Fantasy fiction, which is one of the top read categories of our user and the book category. 
+The reviews on the right are more mixed but on the left, top 10 reviewers most similar rated it either 4/5 stars. Looking at the categories of books previously read by the reviewers, the ones of the right have read a higher % of Sci-Fi Fantasy fiction, which is one of the top read categories of our user and the book category.
 
 ![](images/reordering_reviews.png)
 
@@ -97,7 +97,7 @@ Assessing the overall impact of re-ordering the reviews, as I mentioned before, 
 - Difference of sum of top 10 ratings -  -1.34 / abs value 1.91: Re-ordering the reviews would mean the top 10 reviews would on average have 1.34 stars more, which could be beneficial for retailers. 
 
 
-## Next Steps:
+## Next Steps
 All in all, the project was a great way to learn more about recommender systems. Here are few ideas I have to take it further and improve the model: 
 
 - Gather better metadata to be able to understand and assess the impact of re-ordering more accurately
