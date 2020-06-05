@@ -1,6 +1,6 @@
 # General Assembly Data Science Capstone Project - Book Review Recommender
 
-The purpose of this project was to build a book review recommender system, a system that recommends books to users and orders the reviews shown for each book according to the reviewers most similar to the user. 
+The purpose of this project was to build a book review recommender system, a system that recommends books to users and orders the reviews shown for each book recommendation in order of the reviewers most similar to the user. 
 
 ## Background and Problem Statement
 When reading book reviews before purchasing a book, I often find myself wondering how much weight I should give the reviews. Was the reviewer similar to me and if their experience therefore would be similar to mine? I also never really read past the first 5 reviews, which are usually ranked by reviewer ranking or the number of likes. This gave me the idea to build a book review recommender system where I would first build a book recommender system and use this information to find the optimal order the reviews should appear in for every user and their recommended books, where the reviews are in order of the most similar reviewers to them. 
@@ -30,14 +30,9 @@ Files: `testing_surprise_algos`, `baselineonly_gridsearch`, `knnbaseline_gridsea
 
 The [Surprise library](https://surprise.readthedocs.io/en/stable/index.html), a Python scikit, comes with a large of recommender system algorithms and I wanted to test all of the algorithms to find the best few, in terms of minimum RMSE, to gridsearch and hypertune even further. I used code from [this notebook](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Building%20Recommender%20System%20with%20Surprise.ipynb) to iteratively cross validate all of the algorfirst cross validated all the algorithms, the code for this is in the notebook `testing_surprise_algos`. 
 
-image
+![](images/surprise_algos.png)
 
 I picked BaselineOnly, SVD (picked this over SVD++ due to fit time) and KNNBaseline to hypertune with gridsearch further to obtain best RMSE score possible - BaselineOnly had the best score after gridsearching at 0.85279 (vs SVD at 0.8579 and KNNBaseline 0.8920). The code for gridsearching the three algos are in the notebooks `baselineonly_gridsearch`, `knnbaseline_gridsearch` and `svd_gridsearch`.
-
-## Recommender systems
-No
-- Cosine similarities function script: A script containing a random generator function that allow to pick a user and randomly one of their top 10 books. Function returns the current order of book, recommended order, comparision of categories. 
-- Results and metrics: metrics to measure the impact of the model as well as visualising the result of the re-ordering using the cosine similarities function 
 
 
 ## Recommender systems
@@ -46,28 +41,17 @@ Files: `basic_rec_system`, `baseline_only_rec_system`, `svd_and_knn_rec_systems`
 ### Impact of the model 
 We can use the RMSE score to assess how well the model is doing in terms of recommending books. However, measuring if reordering the reviews based on user similarities is helpful the user or not is a lot harder as I would need customers to tell me if this reordering is helpful or not. But it was interesting to see if the model had any massive impact, so I came up with three metrics to try to assess this:
 
-  1) rating difference: difference sum of the first 10 reviews before and after reordering 
+  1) rating difference: difference sum of the first 10 reviews before and after reordering, as most customers never read past the first 10 reviews. 
   2) rank difference: difference in the sum of the product of rating and rank the review is shows before and after reordering
   3) Pearson correlation of the ranks before and after (essentially Spearman correlation of the ratings before and after)
 
 
-### Basic recommender system:
-I first implemented a basic recommender system to get a general sense of how the algorithms were working. The basic recommder system uses this equation to estimate the rating, ![](https://latex.codecogs.com/svg.latex?r_%7Bui%7D), that user ![](https://latex.codecogs.com/svg.latex?u) would give an item ![](https://latex.codecogs.com/svg.latex?i): 
-![](https://latex.codecogs.com/svg.latex?r_{ui}&space;=&space;\mu&space;&plus;&space;b_u&space;&plus;&space;b_i)
+### Models implemented: 
+- Basic recommender system (`basic_rec_system`)
+- BaselineOnly recommender system (`baseline_only_rec_system')
+- SVD and KNNBaseline recommender systems (`svd_and_knn_rec_systems`)
 
-where ![](https://latex.codecogs.com/svg.latex?\mu) is the overall rating mean, ![](https://latex.codecogs.com/svg.latex?b_u) is the user bias (e.g. are they usually a more critical rater) and ![](https://latex.codecogs.com/svg.latex?b_i)is the item bias after adjusting for the overall mean. We can use this to create a prediction matrix (rows = users & columns = books), where we can calculate the ratings for each user for each book, which we can then use to obtain the top n recommendations for each user. The notebook `basic_rec_system` details this process. 
-
-### BaselineOnly recommender system. 
-
-BaslineOnly approach works by estimating ![](https://latex.codecogs.com/svg.latex?b_{ui}), which can be defined as follows:
-
-![](https://latex.codecogs.com/svg.latex?b_{ui}&space;=&space;\mu&space;&plus;&space;b_u&space;&plus;&space;b_i)
-
-where ![](https://latex.codecogs.com/svg.latex?\mu) is the overall rating mean, ![](https://latex.codecogs.com/svg.latex?b_u) is the user bias (e.g. are they usually a more critical rater) and ![](https://latex.codecogs.com/svg.latex?b_i) is the item bias after adjusting for the overall mean. The difference from the basic recommder system is that the algorithm tries to find the optimal ![](https://latex.codecogs.com/svg.latex?b_i) and ![](https://latex.codecogs.com/svg.latex?b_u) by minimising the following equation (RMSE):
-
-![](https://latex.codecogs.com/svg.latex?min&space;\sum&space;(r_{ui}&space;-&space;\mu&space;-&space;b_u&space;-&space;b_i)^2&space;&plus;&space;\lambda&space;(\sum_u&space;b_u^2&space;&plus;&space;\sum_i&space;b_i^2))
-
-where ![](https://latex.codecogs.com/svg.latex?\lambda) serves as a regularisation term to avoid overfitting. We can use this to construct the prediction matrix. [This report](http://courses.ischool.berkeley.edu/i290-dm/s11/SECURE/a1-koren.pdf) has a great explanation of the mathematicals workings of this algo and others that Surprise builds on. 
+For all the models, the process involved first building the most accurate prediction matrix possible(rows = users & columns = books) to have a complete set of estimated predictions for all books by all users. We can do this by minimising the RMSE score from known ratings. Then we can use this matrix to get the top N (in our case 10) recomendations for every user and calculate user similairities (cosine similarity). For each user and recommended book, we can use the user similarities to reorder the reviews and assess the impact of doing so using the three metrics defined above. To make the code more efficient and compact, I defined the functions to do these jobs in the script `recommender_functions.py`, 
 
 ### Recommender_functions.py script 
 
@@ -80,8 +64,6 @@ Functions
 - `get_categories` : Returns top 10 categories previously read by the user and top 10 categories of the recommended books. A visual way to make sense of results of recommendation algo
 - `review_reorder_example`:Returns a visual example of how recordering the reviews would look like i.e. returns the order of reviews before and after calculating the user similarities, along with the 3 impact measurement metrics for a chosen user-item pair.
 
-### SVD and KNNBaseline recommender system:
-I have outlined the code to build the prediction matrices for both the SVD and KNNBaseline models (fitted for the optimal parameters after gridsearching) in this notebook. To test the examples and use the functions in the recommender_funtions script, please check the basic or BaselineOnly implementations. 
 
 ## Results:
 Correlation of ranks: 0.51 
