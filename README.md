@@ -47,9 +47,9 @@ As the image below shows, I picked BaselineOnly, SVD (picked this over SVD++ due
 Files: `basic_rec_system`, `baseline_only_rec_system`, `svd_and_knn_rec_systems` and `recommender_functions.py`
 
 I implemented the following 4 recommender system models: 
-- Basic recommender system (`basic_rec_system`)
-- BaselineOnly recommender system (`baseline_only_rec_system`) - Best RMSE score at 0.85279
-- SVD and KNNBaseline recommender systems (`svd_and_knn_rec_systems`)
+- **Basic recommender system** (`basic_rec_system`)
+- **BaselineOnly recommender system** (`baseline_only_rec_system`) - Best RMSE score at 0.85279
+- **SVD and KNNBaseline recommender systems** (`svd_and_knn_rec_systems`)
 
 For all the models, the process involved first building the most accurate prediction matrix possible (rows = users & columns = books) to have a complete set of estimated predictions for all books by all users. We can do this by minimising the RMSE score from known ratings. Then we can use this matrix to get the top N (in our case 10) recomendations for every user and calculate user similairities (cosine similarity). 
 
@@ -57,7 +57,7 @@ For each user and recommended book, we can use the user similarities to reorder 
 
 
 ### Measuring the impact of the model 
-We can use the RMSE score to assess how well the model is doing in terms of recommending books. However, measuring if re-ordering the reviews based on user similarities is helpful the user or not is a lot harder as I would need customers to tell me if this re0ordering is helpful or not. But it was interesting to see if the model had any noticeable impact, so I came up with three metrics to try to assess this:
+We can use the RMSE score to assess how well the model is doing in terms of recommending books. However, measuring if re-ordering the reviews based on user similarities is helpful the user or not is a lot harder as I would need customers to tell me if this re-ordering is helpful or not. But it was interesting to see if the model had any noticeable impact, so I came up with three metrics to try to assess this:
 
   1) rating difference: difference sum of the first 10 reviews before and after re-ordering, as most customers never read past the first 10 reviews. 
   2) rank difference: difference in the sum of the product of rating and the rank of the review before and after re-ordering
@@ -83,22 +83,18 @@ The reviews on the right are more mixed but on the left, where the top 10 review
 
 ![](images/reordering_reviews.png)
 
-Assessing the overall impact of re-ordering the reviews, as I mentioned before, is hard to measure but here are the averages of the metric I came up with: 
+Assessing the overall impact of re-ordering the reviews, as I mentioned before, is hard to measure or make sense of but here are the overall averages of the 3 metrics I defined earlier: 
 
-- Avg correlation of ranks - 0.51: Does show that the reordering does cause a bit of jumbling of the order of the reviews
+- Avg correlation of ranks - 0.48: Does show that the re-ordering does move the reviews around enough for there to be low correlation, poses the question if most liked reviews are necessary useful to everyone. 
 
-- Difference of weighted rating sums: 11.6 / abs value: 75. 1
+- Difference of weighted rating sums - 11.6 / abs value 75.1
 
-- Difference of sum of top 10 ratings:  -1.34 / abs value:  1.91 
+- Difference of sum of top 10 ratings -  -1.34 / abs value 1.91: Re-ordering the reviews would mean the top 10 reviews would on average have 1.34 stars more, which could be beneficial for retailers. 
 
 ## Next Steps:
-All in all, the project was a great way to learn more about recommender systems. 
-- Better metadata, or try to group the data
-- try to include review text context analysis to improve the recommender system from [this paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4735905/) Combining Review Text Content (RTC) and User Similarity Matrix to obtain more information and to improve the Review Rating Prediction 
-- neighbourhood models to use for cosine similarity rather than calculating using the whole user-item matrix for efficiency
-- Try this with a more comprehensive dataset (GoodReads) on AWS 
-- Better metric to measure the impact of recommending reviews
+All in all, the project was a great way to learn more about recommender systems. Here are few ideas I have to take it further and improve the model: 
+- Gather better metadata to be able to understand and assess the impact of re-ordering more accurately
+- Use a bigger and more comprehensive dataset to test the model on AWS
+- Include Review Text Context analysis to potentially improve rating predictions as detailed in [this paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4735905/) 
+- Define better metrics to measure the helpfulness and impact of personalising reviews
  
-
-
-
