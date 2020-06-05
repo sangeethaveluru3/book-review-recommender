@@ -64,7 +64,7 @@ We can use the RMSE score to assess how well the model is doing in terms of reco
 
 
 ### Basic recommender system:
-I first implemented a basic recommender system to get a general sense of how the algorithms were working. The basic recommder system uses this equation to estimate the rating, ![](https://latex.codecogs.com/svg.latex?r_{ui}), that user ![](https://latex.codecogs.com/svg.latex?u) would give an item ![](https://latex.codecogs.com/svg.latex?i): 
+I first implemented a basic recommender system to get a general sense of how the algorithms were working. The basic recommder system uses this equation to estimate the rating, ![](https://latex.codecogs.com/svg.latex?r_%7Bui%7D), that user ![](https://latex.codecogs.com/svg.latex?u) would give an item ![](https://latex.codecogs.com/svg.latex?i): 
 ![](https://latex.codecogs.com/svg.latex?r_{ui}&space;=&space;\mu&space;&plus;&space;b_u&space;&plus;&space;b_i)
 
 where ![](https://latex.codecogs.com/svg.latex?\mu) is the overall rating mean, ![](https://latex.codecogs.com/svg.latex?b_u) is the user bias (e.g. are they usually a more critical rater) and ![](https://latex.codecogs.com/svg.latex?b_i)is the item bias after adjusting for the overall mean. We can use this to create a prediction matrix (rows = users & columns = books), where we can calculate the ratings for each user for each book, which we can then use to obtain the top n recommendations for each user. The notebook `basic_rec_system` details this process. 
