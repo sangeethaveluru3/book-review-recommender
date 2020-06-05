@@ -53,15 +53,23 @@ No
 
 
 ## Recommender systems
-Files:
+Files: `basic_rec_system`, `baseline_only_rec_system`, `svd_and_knn_rec_systems` and `recommender_functions.py`
 
-### Basic Recommender system:
+### Impact of the model 
+We can use the RMSE score to assess how well the model is doing in terms of recommending books. However, measuring if reordering the reviews based on user similarities is helpful the user or not is a lot harder as I would need customers to tell me if this reordering is helpful or not. But it was interesting to see if the model had any massive impact, so I came up with three metrics to try to assess this:
+
+  1) rating difference: difference sum of the first 10 reviews before and after reordering 
+  2) rank difference: difference in the sum of the product of rating and rank the review is shows before and after reordering
+  3) Pearson correlation of the ranks before and after (essentially Spearman correlation of the ratings before and after)
+
+
+### Basic recommender system:
 I first implemented a basic recommender system to get a general sense of how the algorithms were working. The basic recommder system uses this equation to estimate the rating, $r_{ui}$, that user $u$ would give an item $i$: 
 $$r_{ui} = \mu + b_u + b_i$$
 
 where $\mu$ is the overall rating mean, $b_u$ is the user bias (e.g. are they usually a more critical rater) and $b_i$ is the item bias after adjusting for the overall mean. We can use this to create a prediction matrix (rows = users & columns = books), where we can calculate the ratings for each user for each book, which we can then use to obtain the top n recommendations for each user. The notebook `basic_rec_system` details this process. 
 
-### BaselineOnly Recommender system. 
+### BaselineOnly recommender system. 
 
 BaslineOnly approach works by estimating $b_{ui}$, which can be defined as follows:
 
@@ -76,20 +84,26 @@ where $\lambda$ serves as a regularisation term to avoid overfitting. We can use
 ### Recommender_functions.py script 
 
 Functions 
-- 
-- 
--
+- `get_top_10`: Get the top 10 book recommendations for every user. I decided to chose the top 5 books and randomly sample 5 books from the next 10 books to improve the coverage ratio. 
+- `calculate_coverage`: Calculates the coverage ratio, i.e. what proportion of all available books are being recommended, a measure to check if the algorithm is only recommending the most popular books to everyone
+- `precision_recall_at_k`: Code mainly from the [Surprise documentation](https://surprise.readthedocs.io/en/stable/index.html) that calculates the precision and recall scores
+- `calculate_impact`: Calculates the 3 different ways of acessing the impact of reordering 
+    the reviews according to user similarities for each user-book pair, rating difference, rank difference, Pearson correlation of the ranks before and after.
+- `get_categories` : Returns top 10 categories previously read by the user and top 10 categories of the recommended books. A visual way to make sense of results of recommendation algo
+- `review_reorder_example`:Returns a visual example of how recordering the reviews would look like i.e. returns the order of reviews before and after calculating the user similarities, along with the 3 impact measurement metrics for a chosen user-item pair.
+
+### SVD and KNNBaseline recommender system:
+I have outlined the code to build the prediction matrices for both the SVD and KNNBaseline models (fitted for the optimal parameters after gridsearching) in this notebook. To test the examples and use the functions in the recommender_funtions script, please check the basic or BaselineOnly implementations. 
+
+## Results:
 
 
-I obviously cannot measure the impact of the model as I would need customers to tell me if this reordering is helpful or not but it was interesting to see if the model had any massive impact. 
 
+
+## Next Steps:
 - Group the categories a bit better
 - Use better meta dataset 
 - try to include review text context analysis to improve the recommender system 
 - neighbourhood models to use for cosine similarity rather than calculating using the whole user-item matrix 
-
-
-## Results and Next Steps:
-
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) 
 
