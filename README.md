@@ -31,7 +31,6 @@ Files: `testing_surprise_algos`, `baselineonly_gridsearch`, `knnbaseline_gridsea
 The [Surprise library](https://surprise.readthedocs.io/en/stable/index.html), a Python scikit, comes with a large of recommender system algorithms and I wanted to test all of the algorithms to find the best few, in terms of minimum RMSE, to gridsearch and hypertune even further. I used code from [this notebook](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Building%20Recommender%20System%20with%20Surprise.ipynb) to iteratively cross validate all of the algorfirst cross validated all the algorithms, the code for this is in the notebook `testing_surprise_algos`. 
 
 ![](images/surprise_algos.png)
-
 I picked BaselineOnly, SVD (picked this over SVD++ due to fit time) and KNNBaseline to hypertune with gridsearch further to obtain best RMSE score possible - BaselineOnly had the best score after gridsearching at 0.85279 (vs SVD at 0.8579 and KNNBaseline 0.8920). The code for gridsearching the three algos are in the notebooks `baselineonly_gridsearch`, `knnbaseline_gridsearch` and `svd_gridsearch`.
 
 
@@ -48,7 +47,7 @@ We can use the RMSE score to assess how well the model is doing in terms of reco
 
 ### Models implemented: 
 - Basic recommender system (`basic_rec_system`)
-- BaselineOnly recommender system (`baseline_only_rec_system`)
+- BaselineOnly recommender system (`baseline_only_rec_system`) - Best RMSE score at 0.85279
 - SVD and KNNBaseline recommender systems (`svd_and_knn_rec_systems`)
 
 For all the models, the process involved first building the most accurate prediction matrix possible(rows = users & columns = books) to have a complete set of estimated predictions for all books by all users. We can do this by minimising the RMSE score from known ratings. Then we can use this matrix to get the top N (in our case 10) recomendations for every user and calculate user similairities (cosine similarity). For each user and recommended book, we can use the user similarities to reorder the reviews and assess the impact of doing so using the three metrics defined above. To make the code more efficient and compact, I defined the functions to do these jobs in the script `recommender_functions.py`, 
@@ -66,16 +65,22 @@ Functions
 
 
 ## Results:
-Correlation of ranks: 0.51 
+All in all, the project was a great way to learn more about recommender systems. I thought I would run through an example here to visualise reordering of reviews and impact of the model. I have decided to pick a random user, 'A3UDYY6L2NH3JS' and a book from their recommended list, asin: 0575081384 & book name: The KingKiller Chronicles, The Name of the Wind. The image below shows what order the reviews would currently appear (in order of likes) on the right and on the left, the order the reviews should appear if ordered according to user similarity. This example is a great demonstration of a case where the user reading the reviews currently would have mixed thoughts on buying the book but according to reviewers similar to him, they would love it. 
 
-Difference of weighted rating sums: 11.6 / (abs) 75. 1
+![](images/reordering_reviews.png)
 
-Difference of sum of top 10 ratings:  -1.34 / (abs) 1.91 
+It was quite hard to sense the recommendations or the reviewer similarities through observing the categories of the books as the data was firstly incomplete and the book tags were very broad and vague. The avgs of the three metric defined above are as follows:
+
+- Avg correlation of ranks: 0.51
+  Does show that the reordering does cause a bit of jumbling of the order of the reviews
+
+- Difference of weighted rating sums: 11.6 / abs value: 75. 1
+
+- Difference of sum of top 10 ratings:  -1.34 / abs value:  1.91 
 
 ## Next Steps:
 - Group the categories a bit better
 - Use better meta dataset 
 - try to include review text context analysis to improve the recommender system 
 - neighbourhood models to use for cosine similarity rather than calculating using the whole user-item matrix 
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) 
 
