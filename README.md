@@ -64,22 +64,22 @@ We can use the RMSE score to assess how well the model is doing in terms of reco
 
 
 ### Basic recommender system:
-I first implemented a basic recommender system to get a general sense of how the algorithms were working. The basic recommder system uses this equation to estimate the rating, $r_{ui}$, that user $u$ would give an item $i$: 
-$$r_{ui} = \mu + b_u + b_i$$
+I first implemented a basic recommender system to get a general sense of how the algorithms were working. The basic recommder system uses this equation to estimate the rating, ![](https://latex.codecogs.com/svg.latex?r_{ui}), that user ![](https://latex.codecogs.com/svg.latex?u) would give an item ![](https://latex.codecogs.com/svg.latex?i): 
+![](https://latex.codecogs.com/svg.latex?r_{ui}&space;=&space;\mu&space;&plus;&space;b_u&space;&plus;&space;b_i)
 
-where $\mu$ is the overall rating mean, $b_u$ is the user bias (e.g. are they usually a more critical rater) and $b_i$ is the item bias after adjusting for the overall mean. We can use this to create a prediction matrix (rows = users & columns = books), where we can calculate the ratings for each user for each book, which we can then use to obtain the top n recommendations for each user. The notebook `basic_rec_system` details this process. 
+where ![](https://latex.codecogs.com/svg.latex?\mu) is the overall rating mean, ![](https://latex.codecogs.com/svg.latex?b_u) is the user bias (e.g. are they usually a more critical rater) and ![](https://latex.codecogs.com/svg.latex?b_i)is the item bias after adjusting for the overall mean. We can use this to create a prediction matrix (rows = users & columns = books), where we can calculate the ratings for each user for each book, which we can then use to obtain the top n recommendations for each user. The notebook `basic_rec_system` details this process. 
 
 ### BaselineOnly recommender system. 
 
-BaslineOnly approach works by estimating $b_{ui}$, which can be defined as follows:
+BaslineOnly approach works by estimating ![](https://latex.codecogs.com/svg.latex?b_{ui}), which can be defined as follows:
 
-$$b_{ui} = \mu + b_u + b_i$$
+![](https://latex.codecogs.com/svg.latex?b_{ui}&space;=&space;\mu&space;&plus;&space;b_u&space;&plus;&space;b_i)
 
-where $\mu$ is the overall rating mean, $b_u$ is the user bias (e.g. are they usually a more critical rater) and $b_i$ is the item bias after adjusting for the overall mean. The difference from the basic recommder system is that the algorithm tries to find the optimal $b_u$ and $b_i$ by minimising the following equation (RMSE):
+where ![](https://latex.codecogs.com/svg.latex?\mu) is the overall rating mean, ![](https://latex.codecogs.com/svg.latex?b_u) is the user bias (e.g. are they usually a more critical rater) and ![](https://latex.codecogs.com/svg.latex?b_i) is the item bias after adjusting for the overall mean. The difference from the basic recommder system is that the algorithm tries to find the optimal ![](https://latex.codecogs.com/svg.latex?b_i) and ![](https://latex.codecogs.com/svg.latex?b_u) by minimising the following equation (RMSE):
 
-$$ min \sum (r_{ui} - \mu - b_u - b_i)^2 + \lambda (\sum_u b_u^2 + \sum_i b_i^2)$$
+![](https://latex.codecogs.com/svg.latex?min&space;\sum&space;(r_{ui}&space;-&space;\mu&space;-&space;b_u&space;-&space;b_i)^2&space;&plus;&space;\lambda&space;(\sum_u&space;b_u^2&space;&plus;&space;\sum_i&space;b_i^2))
 
-where $\lambda$ serves as a regularisation term to avoid overfitting. We can use this to construct the prediction matrix. [This report](http://courses.ischool.berkeley.edu/i290-dm/s11/SECURE/a1-koren.pdf) has a great explanation of the mathematicals workings of this algo and others that Surprise builds on. 
+where ![](https://latex.codecogs.com/svg.latex?\lambda) serves as a regularisation term to avoid overfitting. We can use this to construct the prediction matrix. [This report](http://courses.ischool.berkeley.edu/i290-dm/s11/SECURE/a1-koren.pdf) has a great explanation of the mathematicals workings of this algo and others that Surprise builds on. 
 
 ### Recommender_functions.py script 
 
@@ -96,9 +96,6 @@ Functions
 I have outlined the code to build the prediction matrices for both the SVD and KNNBaseline models (fitted for the optimal parameters after gridsearching) in this notebook. To test the examples and use the functions in the recommender_funtions script, please check the basic or BaselineOnly implementations. 
 
 ## Results:
-
-
-
 
 ## Next Steps:
 - Group the categories a bit better
