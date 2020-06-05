@@ -48,7 +48,7 @@ We can use the RMSE score to assess how well the model is doing in terms of reco
 
 ### Models implemented: 
 - Basic recommender system (`basic_rec_system`)
-- BaselineOnly recommender system (`baseline_only_rec_system')
+- BaselineOnly recommender system (`baseline_only_rec_system`)
 - SVD and KNNBaseline recommender systems (`svd_and_knn_rec_systems`)
 
 For all the models, the process involved first building the most accurate prediction matrix possible(rows = users & columns = books) to have a complete set of estimated predictions for all books by all users. We can do this by minimising the RMSE score from known ratings. Then we can use this matrix to get the top N (in our case 10) recomendations for every user and calculate user similairities (cosine similarity). For each user and recommended book, we can use the user similarities to reorder the reviews and assess the impact of doing so using the three metrics defined above. To make the code more efficient and compact, I defined the functions to do these jobs in the script `recommender_functions.py`, 
