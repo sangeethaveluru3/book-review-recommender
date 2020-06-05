@@ -20,9 +20,18 @@ I had initially planned to upload these large CSV files to a Postgres database o
 Files:`eda_book_review` 
 
 I have gone through all of my findings in EDA of the datasets in the notebook `eda_book_review` notebook, but here are the main takeaways:
-- The reviews were very skewed to the positive side with mainly 4 or 5 star ratings. 
+- The reviews were very skewed to the positive side with mainly 4 or 5 star ratings.
+
+![](images/rating_dist.png)
+
 - Negative reviews tend to get more attention as the avg number of total votes (likes) per rating category is the highest for 1 star and 2 star reveiews. This could push negative reviews unfairly to the top. 
+
+![](images/neg_reviews.png)
+
 - Look over the years, from 2000 to 2014, reviewers seem to have gotten more critical over the years with the avg rating dropped from ~4.25 to ~3.9. Interestingly, there is a large drop in 2007/2008, around the time of the financial crash, maybe to signify that the emotional toll from the economic collapse split over into how critical the reviewers were? 
+
+![](images/ratings_over_time.png)
+
 - Not all of the books had metadata and even the books that did, some of information was vague, broad and not complete. E.g. most books had the tag 'Literature & Fiction' which made it hard to distiguish books well enough from one another. This is especially when trying to compare the results of the recommender system. 
 
 ## Picking the best algorithm and Gridsearching (Hypertuning)
@@ -31,6 +40,7 @@ Files: `testing_surprise_algos`, `baselineonly_gridsearch`, `knnbaseline_gridsea
 The [Surprise library](https://surprise.readthedocs.io/en/stable/index.html), a Python scikit, comes with a large of recommender system algorithms and I wanted to test all of the algorithms to find the best few, in terms of minimum RMSE, to gridsearch and hypertune even further. I used code from [this notebook](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Building%20Recommender%20System%20with%20Surprise.ipynb) to iteratively cross validate all of the algorfirst cross validated all the algorithms, the code for this is in the notebook `testing_surprise_algos`. 
 
 ![](images/surprise_algos.png)
+
 I picked BaselineOnly, SVD (picked this over SVD++ due to fit time) and KNNBaseline to hypertune with gridsearch further to obtain best RMSE score possible - BaselineOnly had the best score after gridsearching at 0.85279 (vs SVD at 0.8579 and KNNBaseline 0.8920). The code for gridsearching the three algos are in the notebooks `baselineonly_gridsearch`, `knnbaseline_gridsearch` and `svd_gridsearch`.
 
 
