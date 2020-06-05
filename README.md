@@ -84,6 +84,11 @@ Functions
 I have outlined the code to build the prediction matrices for both the SVD and KNNBaseline models (fitted for the optimal parameters after gridsearching) in this notebook. To test the examples and use the functions in the recommender_funtions script, please check the basic or BaselineOnly implementations. 
 
 ## Results:
+Correlation of ranks: 0.51 
+
+Difference of weighted rating sums: 11.6 / (abs) 75. 1
+
+Difference of sum of top 10 ratings:  -1.34 / (abs) 1.91 
 
 ## Next Steps:
 - Group the categories a bit better
