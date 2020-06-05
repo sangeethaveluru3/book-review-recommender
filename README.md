@@ -23,7 +23,7 @@ I have gone through all of my findings in EDA of the datasets in the notebook `e
 
 The reviews were very skewed to the positive side with mainly 4 or 5 star ratings. 
 
-image 
+![](images/rating_dist.png)
 
 Negative reviews tend to get more attention as the avg number of total votes (likes) per rating category is the highest for 1 star and 2 star reveiews. This could push negative reviews unfairly to the top. 
 
