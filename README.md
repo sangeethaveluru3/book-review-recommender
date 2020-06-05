@@ -89,8 +89,12 @@ It was quite hard to sense the recommendations or the reviewer similarities thro
 - Difference of sum of top 10 ratings:  -1.34 / abs value:  1.91 
 
 ## Next Steps:
-- Group the categories a bit better
-- Use better meta dataset 
-- try to include review text context analysis to improve the recommender system 
-- neighbourhood models to use for cosine similarity rather than calculating using the whole user-item matrix 
+- Better metadata, or try to group the data
+- try to include review text context analysis to improve the recommender system from [this paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4735905/) Combining Review Text Content (RTC) and User Similarity Matrix to obtain more information and to improve the Review Rating Prediction 
+- neighbourhood models to use for cosine similarity rather than calculating using the whole user-item matrix for efficiency
+- Try this with a more comprehensive dataset (GoodReads) on AWS 
+- Better metric to measure the impact of recommending reviews
+ 
+
+
 
