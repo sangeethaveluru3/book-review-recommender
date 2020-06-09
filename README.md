@@ -10,6 +10,7 @@ The purpose of this project was to build a book review recommender system, one t
 - [Picking the best algorithm and Gridsearching](#algo)
 - [Recommender Systems](#models)
 - [Results](#results)
+- [Next Steps](#next)
 
 ---
 
@@ -115,6 +116,7 @@ Assessing the overall impact of re-ordering the reviews, as I mentioned before, 
 
 - Difference of sum of top 10 ratings -  -1.34 / abs value 1.91: Re-ordering the reviews would mean the top 10 reviews would on average have 1.34 stars more, which could be beneficial for retailers. 
 
+<a name="next"/>
 
 ## Next Steps
 All in all, the project was a great way to learn more about recommender systems. Here are few ideas I have to take it further and improve the model: 
