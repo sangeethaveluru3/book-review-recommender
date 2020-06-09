@@ -3,11 +3,25 @@
 The purpose of this project was to build a book review recommender system, one that recommends books to users and orders the existing reviews for each book recommendation in order of the reviewers most similar to the user. 
 
 
+## Table of Contents:
+- [Problem Statement](#prob)  
+- [Data Accquring & Cleaning](#data)
+- [EDA](#eda)
+- [Picking the best algorithm and Gridsearching](#algo)
+- [Recommender Systems](#models)
+- [Results](#results)
+
+---
+
+
+<a name="prob"/>
+
 ## Background and Problem Statement
 When reading book reviews before purchasing a book, I often find myself wondering how much weight I should give the reviews. How similar are the reviewers to me and therefore how much would their experience reflect my own? Reviews currently are ordered by the number of likes/helpful votes or reviewer ranking and in the age of recommender systems, it would be interesting to observe the effect of personalising the order of reviews too - this is currently a requested feature on GoodReads. 
 
 While this project would just consider books, this could extend to other products where the experience vs the functionality of the product would be more important. 
 
+<a name="data"/>
 
 ## Data Accquring & Cleaning
 Relevant files: `data_cleaning` & `connecting_to_gcloud`
@@ -20,6 +34,7 @@ I am using the [datasets provided by Julian McAuley and his team at USCD](http:/
 
 The condensed dataset had ~270k rows, containing only the users and books with atleast 50 reviews.
 
+<a name="eda"/>
 
 ## EDA
 Relevant files:`eda_book_review` 
@@ -36,6 +51,8 @@ The `eda_book_review` notebook contains a detailed look into the book reviews, b
 
 Note: The metadata was incomplete and messy as not all of the books were contained in the metadata and for the books that did exist, some of information was vague and broad. For example, most books had the tag 'Literature & Fiction' which made it hard to distiguish books well enough from one another. This is especially apparent when trying to understand the results of the recommender system. 
 
+<a name="algo"/>
+
 ## Picking the best algorithm and Gridsearching (Hypertuning)
 Relevant files: `testing_surprise_algos`, `baselineonly_gridsearch`, `knnbaseline_gridsearch` and `svd_gridsearch`
 
@@ -45,8 +62,9 @@ As the image below shows, I picked BaselineOnly, SVD (picked this over SVD++ due
 
 ![](images/surprise_algos.png)
 
+<a name="models"/>
 
-## Recommender systems
+## Recommender Systems
 Files: `basic_rec_system`, `baseline_only_rec_system`, `svd_and_knn_rec_systems` and `recommender_functions.py`
 
 I implemented the following 4 recommender system models: 
@@ -75,6 +93,7 @@ We can use the RMSE score to assess how well the model is doing in terms of reco
 - `get_categories` : Returns top 10 categories previously read by the user and top 10 categories of the recommended books. A visual way to make sense of results of recommendation model
 - `review_reorder_example`: Returns a visual example of how re-ordering the reviews would look like, i.e. returns the order of reviews before and after calculating the user similarities, along with the categories previously read by the top 10 reviewers before and after, to assess if there is any noticeable difference. 
 
+<a name="results"/>
 
 ## Results
 The example below is a great case as to why reviewer similarity should play a part in ordering reviews.
