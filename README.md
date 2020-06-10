@@ -5,7 +5,7 @@ The purpose of this project was to build a book review recommender system, one t
 
 ## Table of Contents:
 - [Problem Statement](#prob)  
-- [Data Accquring & Cleaning](#data)
+- [Data Acquiring & Cleaning](#data)
 - [EDA](#eda)
 - [Picking the best algorithm and Gridsearching](#algo)
 - [Recommender Systems](#models)
@@ -24,7 +24,7 @@ While this project would just consider books, this could extend to other product
 
 <a name="data"/>
 
-## Data Accquring & Cleaning
+## Data Acquiring & Cleaning
 Relevant files: `data_cleaning` & `connecting_to_gcloud`
 
 I am using the [datasets provided by Julian McAuley and his team at USCD](http://jmcauley.ucsd.edu/data/amazon/), in particular the 2014 5-core book review dataset and the book metadata. 
